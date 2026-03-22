@@ -12,8 +12,8 @@ const Task = () => {
         setInputValue("");
     }
 
-    const removeTask = () => {
-        
+    const removeTask = (index) => {
+        setNuovoCompito(compito.filter((_, i) => i !== index))
     }
 
     return (
@@ -27,7 +27,7 @@ const Task = () => {
             <p>{inputValue}</p>
             <ul>
                 {compito.map((singoloCompito, index) => (
-                    <li key={index}>{singoloCompito}</li>
+                    <li key={index}>{singoloCompito} <button onClick={() => removeTask(index)}>X</button></li>
                 ))}
             </ul>
 
