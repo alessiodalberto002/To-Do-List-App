@@ -2,40 +2,44 @@ import { useState } from "react";
 
 const Task = () => {
 
-    const [inputValue, setInputValue] = useState("");
-    const [compito, setNuovoCompito] = useState([]);
+    const[inputValue, setInputValue] = useState("");
+    const[task, setTask] = useState([]);
 
-    const aggiungiTask = () => {
-        if (inputValue.trim() !== "") {
-            setNuovoCompito([...compito, inputValue]);
+    const addTask = () => {
+        if(inputValue.trim() !== ""){
+            setTask([...task, inputValue]);
         }
         setInputValue("");
     }
 
-    const removeTask = (index) => {
-        setNuovoCompito(compito.filter((_, i) => i !== index))
+    const removeAllTask = () => {
+        setTask([]);
+        setInputValue("");
     }
 
-    return (
+    return(
 
         <>
-
+        
+        <div className="container py-5">
             <h1>To Do List</h1>
-
-            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-            <button onClick={aggiungiTask}>Aggiungi</button>
-            <p>{inputValue}</p>
-            <ul>
-                {compito.map((singoloCompito, index) => (
-                    <li key={index}>{singoloCompito} <button onClick={() => removeTask(index)}>X</button></li>
-                ))}
-            </ul>
+            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+            <button onClick={addTask}>Aggiungi Task</button>
+            <button onClick={removeAllTask}>Rimuovi Tutto</button>
+            <div>
+                <ul>
+                    {task.map((singleTask, index) => (
+                        <li key={index}>{singleTask}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
 
         </>
 
 
     )
 
-};
+}
 
-export default Task;
+export default Task
